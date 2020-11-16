@@ -46,9 +46,15 @@ def turn_controller():
             print("Please insert a number that's in the list.")
             player_input = int(input("Insert the numbers you want to keep: "))
 
-        
+        # Add the score
+        scores[x] += player_input
 
 # Setup
 clear_screen()
 num_players = get_players()
+
+# Start the game
+scores = [0 for x in range(num_players)]
 turn_controller()
+
+print(scores)

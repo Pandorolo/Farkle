@@ -46,8 +46,14 @@ def turn_controller():
             print("Please insert a number that's in the list.")
             player_input = int(input("Insert the numbers you want to keep: "))
 
-        # Add the score
-        scores[x] += player_input
+        # Count and add the points
+        if player_hand.count(player_input) >= 3:
+        	scores[x] += player_input*100
+        elif player_input == 1:
+        	scores[x] += 100
+        elif player_input == 5:
+        	scores[x] += 50
+        
 
 # Setup
 clear_screen()

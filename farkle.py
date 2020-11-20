@@ -23,37 +23,40 @@ def get_players():
 			print("Please insert an integer number.")
 	return num
 
+# Control the current hand
+def hand_controller(index):
+	# Print the active player and generate his hand
+    clear_screen()
+    print(f"It's the turn of player n.{index}")
+    player_hand = [random.randint(1, 6) for y in range(6)]
+
+    # Print the Hand
+    print("Your hand is: ", end=" ")
+    for n in player_hand:
+        print(n, end=" ")
+    print("\n")
+
+    # Ask for the die/dice the player wants to keep
+    # and check if it's in the list
+    player_input = int(input("Insert the numbers you want to keep: "))
+    player_points = 0
+    while player_input not in player_hand:
+        print("Please insert a number that's in the list.")
+        player_input = int(input("Insert the numbers you want to keep: "))
+
+    # Count and add the points
+    if player_hand.count(player_input) >= 3:
+    	scores[index] += player_input*100
+    elif player_input == 1:
+    	scores[index] += 100
+    elif player_input == 5:
+    	scores[index] += 50
+
 # Control Turns
 def turn_controller():
     # Loop it for every player
     for x in range(num_players):
-        # Print the active player and generate his hand
-        clear_screen()
-        print(f"It's the turn of player n.{x}")
-        player_hand = [random.randint(1, 6) for y in range(6)]
-
-        # Print the Hand
-        print("Your hand is: ", end=" ")
-        for n in player_hand:
-            print(n, end=" ")
-        print("\n")
-
-        # Ask for the die/dice the player wants to keep
-        # and check if it's in the list
-        player_input = int(input("Insert the numbers you want to keep: "))
-        player_points = 0
-        while player_input not in player_hand:
-            print("Please insert a number that's in the list.")
-            player_input = int(input("Insert the numbers you want to keep: "))
-
-        # Count and add the points
-        if player_hand.count(player_input) >= 3:
-        	scores[x] += player_input*100
-        elif player_input == 1:
-        	scores[x] += 100
-        elif player_input == 5:
-        	scores[x] += 50
-        
+        hand_controller(x)
 
 # Setup
 clear_screen()
